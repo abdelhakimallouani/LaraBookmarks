@@ -50,6 +50,8 @@ class AuthController extends Controller
             ]);
         }
 
+    Auth::login(Auth::user());
+
         return redirect()->route('dashboard');
     }
 

@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoriesController;
+use App\Http\Middleware\Authenficate;
 
 Route::get('/', [AuthController::class, 'showlogin']);
 Route::get('/login', [AuthController::class, 'showlogin'])->name('login.form');
@@ -10,7 +12,12 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/register', [AuthController::class, 'showregister'])->name('register.form');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-
-
-Route::get('/dashboard', [AuthController::class, 'dashboard'])->middleware('auth')->name('dashboard');
+Route::middleware([Authenficate::class])->group(function () {
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    
+    Route::get('/dashboard', [AuthController::class, 'dashboard'])->middleware('auth')->name('dashboard');
+    
+    Route::get('/categories', [CategoriesController::class, 'index'])->name('categories.index');
+    route::get('/categories/create', [CategoriesController::class, 'create'])->name('categories.create');
+    Route::post('/categories', [CategoriesController::class, 'store'])->name('categories.store');
+});

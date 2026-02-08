@@ -22,7 +22,7 @@
 
         <main class="flex-1 p-12">
             <header class="mb-10">
-                <h2 class="text-3xl font-extrabold text-[#1e293b] mb-1">Welcome back, Demo</h2>
+                <h2 class="text-3xl font-extrabold text-[#1e293b] mb-1">Welcome back, {{ auth()->user()->name }}</h2>
                 <p class="text-gray-400 font-medium">Here's an overview of your bookmarks.</p>
             </header>
 
@@ -76,11 +76,7 @@
                 <div class="col-span-8">
                     <div class="flex justify-between items-center mb-6 px-2">
                         <h4 class="text-xl font-bold text-[#1e293b]">Recent Links</h4>
-                        <a href="#" class="text-[#0ea5e9] font-bold text-sm flex items-center gap-1">View All <svg
-                                class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17 8l4 4m0 0l-4 4m4 4H3"></path>
-                            </svg></a>
+                        <a href="#" class="text-[#0ea5e9] font-bold text-sm flex items-center gap-1">View All -></a>
                     </div>
 
                     <div class="space-y-4">
