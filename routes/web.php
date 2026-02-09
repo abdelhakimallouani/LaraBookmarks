@@ -22,6 +22,9 @@ Route::middleware([Authenficate::class])->group(function () {
     Route::get('/categories', [CategoriesController::class, 'index'])->name('categories.index');
     route::get('/categories/create', [CategoriesController::class, 'create'])->name('categories.create');
     Route::post('/categories', [CategoriesController::class, 'store'])->name('categories.store');
+    Route::get('/categories/{id}/edit', [CategoriesController::class, 'edit'])->name('categories.edit');
+    Route::put('/categories/{id}', [CategoriesController::class, 'update'])->name('categories.update');
+    Route::delete('/categories/{id}', [CategoriesController::class, 'destroy'])->name('categories.destroy');
 
 
     Route::get('/links', [LinkController::class,'index'])->name('links.index');
@@ -31,4 +34,5 @@ Route::middleware([Authenficate::class])->group(function () {
     Route::get('/tags', [TagController::class,'index'])->name('tags.addtag');
     Route::post('/tags', [TagController::class,'store'])->name('tags.store');
     Route::delete('/tags/{id}', [TagController::class,'destroy'])->name('tags.destroy');
+
 });

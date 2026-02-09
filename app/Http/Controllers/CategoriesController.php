@@ -32,5 +32,33 @@ class CategoriesController extends Controller
 
         return redirect()->route('categories.index');
     }
+
+    public function edit($id)
+    {
+        $category = Categorie::findOrFail($id);
+        return view('categories.update', compact('category'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255'
+        ]);
+
+        $category = Categorie::findOrFail($id);
+        $category->update([
+            'name' => $request->name,
+        ]);
+
+        return redirect()->route('categories.index');
+    }
+
+    public function destroy($id)
+    {
+        $category = Categorie::findOrFail($id);
+        $category->delete();
+
+        return redirect()->route('categories.index');
+    }
     
 }

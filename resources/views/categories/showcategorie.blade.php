@@ -38,9 +38,35 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach ($categories as $category)
                     <div
-                        class="bg-white p-6 rounded-2xl border border-gray-50 shadow-sm hover:shadow-md transition-all flex items-center gap-5 group cursor-pointer">
+                        class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all flex items-center gap-5 group relative cursor-pointer">
+
                         <div
-                            class="w-14 h-14 bg-slate-50 text-slate-500 rounded-2xl flex items-center justify-center shrink-0 transition-transform group-hover:text-[#0ea5e9]">
+                            class="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <form action="{{ route('categories.destroy', $category->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    class="p-2 bg-red-50 text-red-500 rounded-lg hover:bg-red-100 transition-colors">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 7l-.867 12.15c-.178 2.338-2.514 3.895-4.867 3.895H9.5c-2.353 0-4.689-1.557-4.867-3.895L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </form>
+                            <a href="{{ route('categories.edit', $category->id) }}"
+                                class="p-2 bg-blue-50 text-blue-500 rounded-lg hover:bg-blue-100 transition-colors">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
+                                    </path>
+                                </svg>
+                            </a>
+
+                        </div>
+
+                        <div
+                            class="w-14 h-14 bg-blue-50 text-blue-500 rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                             <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z">
@@ -51,7 +77,7 @@
                         <div>
                             <h3 class="text-xl font-bold text-slate-800">{{ $category->name }}</h3>
                             <p class="text-gray-400 text-sm font-medium">
-                                {{ $category->links->count() ?? '0' }} items
+                                {{ $category->links->count() }} items
                             </p>
                         </div>
                     </div>
