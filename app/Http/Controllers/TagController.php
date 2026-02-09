@@ -25,4 +25,12 @@ class TagController extends Controller
 
         return redirect()->route('tags.addtag');
     }
+
+    public function destroy($id)
+    {
+        $tag = tag::findOrFail($id);
+        $tag->delete();
+
+        return redirect()->route('tags.addtag');
+    }
 }

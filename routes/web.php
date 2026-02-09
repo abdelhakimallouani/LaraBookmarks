@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\LinkController;
+use App\Http\Controllers\TagController;
 use App\Http\Middleware\Authenficate;
 
 Route::get('/', [AuthController::class, 'showlogin']);
@@ -26,4 +27,8 @@ Route::middleware([Authenficate::class])->group(function () {
     Route::get('/links', [LinkController::class,'index'])->name('links.index');
     Route::get('/links/create', [LinkController::class,'create'])->name('links.create');
     Route::post('/links', [LinkController::class,'store'])->name('links.store');
+
+    Route::get('/tags', [TagController::class,'index'])->name('tags.addtag');
+    Route::post('/tags', [TagController::class,'store'])->name('tags.store');
+    Route::delete('/tags/{id}', [TagController::class,'destroy'])->name('tags.destroy');
 });
