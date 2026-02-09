@@ -10,13 +10,13 @@
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
                 Dashboard
             </a>
-            <a href="{{ route('links.index') }}" class="flex items-center gap-4 px-4 py-3 {{ request()->is('links*') ? 'bg-[#e0f2fe] text-[#0ea5e9]' : 'text-gray-500 hover:bg-gray-50' }} rounded-xl font-medium transition">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
-                Links
-            </a>
             <a href="{{ route('categories.index') }}" class="flex items-center gap-4 px-4 py-3 {{ request()->is('categories*') ? 'bg-[#e0f2fe] text-[#0ea5e9]' : 'text-gray-500 hover:bg-gray-50' }} rounded-xl font-medium transition">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
                 Categories
+            </a>
+            <a href="{{ route('links.index') }}" class="flex items-center gap-4 px-4 py-3 {{ request()->is('links*') ? 'bg-[#e0f2fe] text-[#0ea5e9]' : 'text-gray-500 hover:bg-gray-50' }} rounded-xl font-medium transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+                Links
             </a>
             <a href="{{ route('tags.addtag') }}" class="flex items-center gap-4 px-4 py-3 {{ request()->is('tags*') ? 'bg-[#e0f2fe] text-[#0ea5e9]' : 'text-gray-500 hover:bg-gray-50' }} rounded-xl font-medium transition">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>

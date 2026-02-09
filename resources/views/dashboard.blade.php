@@ -30,7 +30,7 @@
                 <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-50 flex justify-between items-center">
                     <div>
                         <p class="text-gray-400 text-sm font-semibold mb-1">Total Links</p>
-                        <h3 class="text-4xl font-bold text-[#1e293b]">5</h3>
+                        <h3 class="text-4xl font-bold text-[#1e293b]">{{ $links->count() }}</h3>
                     </div>
                     <div
                         class="w-14 h-14 bg-[#f0f9ff] text-[#0ea5e9] rounded-full flex items-center justify-center border border-[#e0f2fe]">
@@ -45,7 +45,7 @@
                     class="bg-white p-8 rounded-2xl shadow-sm border border-gray-50 flex justify-between items-center text-gray-500">
                     <div>
                         <p class="text-gray-400 text-sm font-semibold mb-1">Categories</p>
-                        <h3 class="text-4xl font-bold text-[#1e293b]">5</h3>
+                        <h3 class="text-4xl font-bold text-[#1e293b]">{{ $categories->count() }}</h3>
                     </div>
                     <div
                         class="w-14 h-14 bg-[#fffbeb] text-[#f59e0b] rounded-full flex items-center justify-center border border-[#fef3c7]">
@@ -58,7 +58,7 @@
                 <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-50 flex justify-between items-center">
                     <div>
                         <p class="text-gray-400 text-sm font-semibold mb-1">Tags</p>
-                        <h3 class="text-4xl font-bold text-[#1e293b]">6</h3>
+                        <h3 class="text-4xl font-bold text-[#1e293b]">{{ $tags->count() }}</h3>
                     </div>
                     <div
                         class="w-14 h-14 bg-[#f0fdf4] text-[#10b981] rounded-full flex items-center justify-center border border-[#dcfce7]">
@@ -76,7 +76,8 @@
                 <div class="col-span-8">
                     <div class="flex justify-between items-center mb-6 px-2">
                         <h4 class="text-xl font-bold text-[#1e293b]">Recent Links</h4>
-                        <a href="#" class="text-[#0ea5e9] font-bold text-sm flex items-center gap-1">View All -></a>
+                        <a href="{{ route('links.index') }}"
+                            class="text-[#0ea5e9] font-bold text-sm flex items-center gap-1">View All -></a>
                     </div>
 
                     <div class="space-y-4">
@@ -91,16 +92,18 @@
                                 </svg>
                             </div>
                             <div class="flex-1">
-                                <div class="flex justify-between items-start mb-1">
-                                    <h5 class="font-bold text-[#1e293b] text-lg">Replit</h5>
-                                    <span
-                                        class="text-[10px] font-extrabold text-[#0ea5e9] uppercase tracking-wider">Development</span>
-                                </div>
-                                <p class="text-gray-400 text-sm font-medium mb-4 italic">https://replit.com</p>
-                                <div class="flex gap-2">
-                                    <span
-                                        class="px-3 py-1 bg-[#f1f5f9] text-gray-500 text-[10px] font-bold rounded-full uppercase">#video</span>
-                                </div>
+                                @foreach ($links as $link)
+                                    <div class="flex justify-between items-start mb-1">
+                                        <h5 class="font-bold text-[#1e293b] text-lg">{{ $link->titre }}</h5>
+                                        <span
+                                            class="text-[10px] font-extrabold text-[#0ea5e9] uppercase tracking-wider">{{ $link->categorie->name }}</span>
+                                    </div>
+                                    <p class="text-gray-400 text-sm font-medium mb-4 italic">{{ $link->url }}</p>
+                                    <div class="flex gap-2">
+                                        <span
+                                            class="px-3 py-1 bg-[#f1f5f9] text-gray-500 text-[10px] font-bold rounded-full uppercase">#video</span>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -109,33 +112,18 @@
                 <div class="col-span-4">
                     <h4 class="text-xl font-bold text-[#1e293b] mb-6">Quick Categories</h4>
                     <div class="bg-white rounded-2xl border border-gray-50 shadow-sm overflow-hidden">
-                        <div
-                            class="p-4 border-b border-gray-50 flex justify-between items-center hover:bg-gray-50 cursor-pointer transition">
-                            <div class="flex items-center gap-4">
-                                <span class="w-2.5 h-2.5 rounded-full bg-pink-300"></span>
-                                <span class="font-bold text-gray-600">Design</span>
+                        @foreach ($categories as $category)
+                            <div
+                                class="p-4 border-b border-gray-50 flex justify-between items-center hover:bg-gray-50 cursor-pointer transition">
+                                <div class="flex items-center gap-4">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-blue-300"></span>
+                                    <span class="font-bold text-gray-600">{{ $category->name }}</span>
+                                </div>
+                                <span
+                                    class="w-8 h-8 flex items-center justify-center border border-gray-100 rounded-lg text-xs font-bold text-gray-400">{{ $category->links_count }}</span>
                             </div>
-                            <span
-                                class="w-8 h-8 flex items-center justify-center border border-gray-100 rounded-lg text-xs font-bold text-gray-400">5</span>
-                        </div>
-                        <div
-                            class="p-4 border-b border-gray-50 flex justify-between items-center hover:bg-gray-50 cursor-pointer transition">
-                            <div class="flex items-center gap-4">
-                                <span class="w-2.5 h-2.5 rounded-full bg-blue-300"></span>
-                                <span class="font-bold text-gray-600">Development</span>
-                            </div>
-                            <span
-                                class="w-8 h-8 flex items-center justify-center border border-gray-100 rounded-lg text-xs font-bold text-gray-400">12</span>
-                        </div>
-                        <div
-                            class="p-4 border-b border-gray-50 flex justify-between items-center hover:bg-gray-50 cursor-pointer transition">
-                            <div class="flex items-center gap-4">
-                                <span class="w-2.5 h-2.5 rounded-full bg-purple-300"></span>
-                                <span class="font-bold text-gray-600">Marketing</span>
-                            </div>
-                            <span
-                                class="w-8 h-8 flex items-center justify-center border border-gray-100 rounded-lg text-xs font-bold text-gray-400">3</span>
-                        </div>
+                        @endforeach
+
                     </div>
                 </div>
 

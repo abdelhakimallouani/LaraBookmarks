@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+// use League\CommonMark\Extension\CommonMark\Node\Inline\Link;
+use App\Models\Link;
+use App\Models\Categorie;
+use App\Models\tag;
+
 
 class AuthController extends Controller
 {
@@ -63,6 +68,9 @@ class AuthController extends Controller
 
     public function dashboard()
     {
-        return view('dashboard');
+        $links = Link::all();
+        $categories = Categorie::all();
+        $tags = tag::all();
+        return view('dashboard', compact('links', 'categories', 'tags'));
     }
 }
