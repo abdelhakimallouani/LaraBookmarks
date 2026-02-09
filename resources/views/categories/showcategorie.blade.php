@@ -17,8 +17,9 @@
 
 <body class="bg-[#f8fafc] text-[#1e293b]">
 
-    <div class="flex">
+    <div class="flex min-h-screen">
         @include('layout.sidebar')
+
         <main class="flex-1 p-12">
             <header class="flex justify-between items-start mb-10">
                 <div>
@@ -35,21 +36,26 @@
             </header>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div
-                    class="bg-white p-6 rounded-[1.5rem] border border-gray-50 shadow-sm hover:shadow-md transition-all flex items-center gap-5 group cursor-pointer">
+                @foreach ($categories as $category)
                     <div
-                        class="w-14 h-14 bg-slate-50 text-slate-500 rounded-2xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-110">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
-                        </svg>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold text-slate-800">Tools</h3>
-                        <p class="text-gray-400 text-sm font-medium">4 items</p>
-                    </div>
-                </div>
+                        class="bg-white p-6 rounded-[1.5rem] border border-gray-50 shadow-sm hover:shadow-md transition-all flex items-center gap-5 group cursor-pointer">
+                        <div
+                            class="w-14 h-14 bg-slate-50 text-slate-500 rounded-2xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-110">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z">
+                                </path>
+                            </svg>
+                        </div>
 
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-800">{{ $category->name }}</h3>
+                            <p class="text-gray-400 text-sm font-medium">
+                                {{ $category->links->count() ?? '0' }} items
+                            </p>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </main>
     </div>

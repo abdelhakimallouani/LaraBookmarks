@@ -10,7 +10,8 @@ class CategoriesController extends Controller
 {
     public function index()
     {
-        return view('categories.showcategorie');
+        $categories = Categorie::where('user_id', Auth::id())->get();
+        return view('categories.showcategorie', compact('categories'));
     }
 
     public function create()

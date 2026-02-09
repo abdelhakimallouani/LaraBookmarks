@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\LinkController;
 use App\Http\Middleware\Authenficate;
 
 Route::get('/', [AuthController::class, 'showlogin']);
@@ -20,4 +21,9 @@ Route::middleware([Authenficate::class])->group(function () {
     Route::get('/categories', [CategoriesController::class, 'index'])->name('categories.index');
     route::get('/categories/create', [CategoriesController::class, 'create'])->name('categories.create');
     Route::post('/categories', [CategoriesController::class, 'store'])->name('categories.store');
+
+
+    Route::get('/links', [LinkController::class,'index'])->name('links.index');
+    Route::get('/links/create', [LinkController::class,'create'])->name('links.create');
+    Route::post('/links', [LinkController::class,'store'])->name('links.store');
 });
