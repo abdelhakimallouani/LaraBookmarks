@@ -38,7 +38,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach ($categories as $category)
                     <div
-                        class="bg-white p-6 rounded-[1.5rem] border border-gray-50 shadow-sm hover:shadow-md transition-all flex items-center gap-5 group cursor-pointer">
+                        class="bg-white p-6 rounded-2xl border border-gray-50 shadow-sm hover:shadow-md transition-all flex items-center gap-5 group cursor-pointer">
                         <div
                             class="w-14 h-14 bg-slate-50 text-slate-500 rounded-2xl flex items-center justify-center shrink-0 transition-transform group-hover:text-[#0ea5e9]">
                             <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
