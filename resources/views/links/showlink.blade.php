@@ -74,25 +74,62 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach ($links as $link)
                     <div
-                        class="bg-white p-8 rounded-2xl border border-gray-50 shadow-sm hover:shadow-md transition-shadow group">
-                        <div
-                            class="w-12 h-12 bg-gray-50 text-gray-400 rounded-xl flex items-center justify-center mb-6 border border-gray-100 group-hover:bg-blue-50 group-hover:text-blue-500 transition-colors">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14">
-                                </path>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-slate-800 mb-1">{{ $link->titre }}</h3>
-                        <p
-                            class="text-gray-400 text-sm font-medium mb-10 italic cursor-pointer hover:text-blue-500 transition-colors">
-                            {{ $link->url }}</p>
+                        class="bg-white p-8 rounded-2xl border border-gray-50 shadow-sm hover:shadow-md transition-all group relative">
 
-                        <div class="flex justify-between items-center pt-6 border-t border-gray-50">
-                            <span
-                                class="text-sm font-bold text-blue-500 tracking-tight">{{ $link->categorie->name }}</span>
-                            <span
-                                class="text-xs font-bold text-gray-300 tracking-tighter">{{ $link->created_at->format('d/m/Y') }}</span>
+                        <div
+                            class="absolute top-6 right-6 flex gap-2 opacity-0 group-hover:opacity-100 transition-all transform translate-y-[-5px] group-hover:translate-y-0">
+                            <a href="{{ route('links.edit', $link->id) }}"
+                                class="p-2 bg-blue-50 text-blue-500 rounded-lg hover:bg-blue-100 transition-colors shadow-sm">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
+                                    </path>
+                                </svg>
+                            </a>
+
+                            <form action="{{ route('links.destroy', $link->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    class="p-2 bg-red-50 text-red-500 rounded-lg hover:bg-red-100 transition-colors shadow-sm">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 7l-.867 12.15c-.178 2.338-2.514 3.895-4.867 3.895H9.5c-2.353 0-4.689-1.557-4.867-3.895L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                                        </path>
+                                    </svg>
+                                </button>
+                            </form>
+                        </div>
+
+                        <div class="flex flex-col h-full">
+                            <div
+                                class="w-12 h-12 bg-gray-50 text-gray-400 rounded-xl flex items-center justify-center mb-6 border border-gray-100 group-hover:bg-blue-50 group-hover:text-blue-500 transition-colors">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14">
+                                    </path>
+                                </svg>
+                            </div>
+
+                            <div class="mb-6">
+                                <h3
+                                    class="text-xl font-bold text-slate-800 mb-2 truncate group-hover:text-blue-600 transition-colors">
+                                    {{ $link->titre }}</h3>
+                                <a href="{{ $link->url }}" target="_blank"
+                                    class="text-gray-400 text-sm font-medium italic break-all hover:text-blue-400 transition-colors block">
+                                    {{ Str::limit($link->url, 40) }}
+                                </a>
+                            </div>
+
+                            <div class="mt-auto flex justify-between items-center pt-6 border-gray-50">
+                                <span
+                                    class="px-3 py-1 bg-blue-50 text-[10px] font-extrabold text-blue-500 tracking-widest border-small rounded-xl">
+                                    {{ $link->categorie->name }}
+                                </span>
+                                <span class="text-xs font-bold text-gray-300 tracking-tighter">
+                                    {{ $link->created_at->format('d/m/Y') }}
+                                </span>
+                            </div>
                         </div>
                     </div>
                 @endforeach

@@ -22,7 +22,7 @@
 
         <main class="flex-1 p-12">
             <header class="mb-10">
-                <h2 class="text-3xl font-extrabold text-[#1e293b] mb-1">Welcome back, {{ auth()->user()->name }}</h2>
+                <h2 class="text-3xl font-extrabold text-[#1e293b] mb-1">Welcome back, <span class="text-[#0ea5e9]">{{ auth()->user()->name }}</span></h2>
                 <p class="text-gray-400 font-medium">Here's an overview of your bookmarks.</p>
             </header>
 
@@ -81,18 +81,18 @@
                     </div>
 
                     <div class="space-y-4">
-                        <div
-                            class="bg-white p-6 rounded-[1.5rem] border border-gray-50 flex items-start gap-5 group hover:shadow-md transition shadow-sm">
+                        @foreach ($links as $link)
                             <div
-                                class="w-12 h-12 bg-[#f0f9ff] text-[#0ea5e9] rounded-xl flex items-center justify-center shrink-0 border border-[#e0f2fe]">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14">
-                                    </path>
-                                </svg>
-                            </div>
-                            <div class="flex-1">
-                                @foreach ($links as $link)
+                                class="bg-white p-6 rounded-2xl border border-gray-50 flex items-start gap-5 group hover:shadow-md transition shadow-sm">
+                                <div
+                                    class="w-12 h-12 bg-[#f0f9ff] text-[#0ea5e9] rounded-xl flex items-center justify-center shrink-0 border border-[#e0f2fe]">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div class="flex-1">
                                     <div class="flex justify-between items-start mb-1">
                                         <h5 class="font-bold text-[#1e293b] text-lg">{{ $link->titre }}</h5>
                                         <span
@@ -103,32 +103,34 @@
                                         <span
                                             class="px-3 py-1 bg-[#f1f5f9] text-gray-500 text-[10px] font-bold rounded-full uppercase">#video</span>
                                     </div>
-                                @endforeach
+                                </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
 
                 <div class="col-span-4">
                     <h4 class="text-xl font-bold text-[#1e293b] mb-6">Quick Categories</h4>
-                    <div class="bg-white rounded-2xl border border-gray-50 shadow-sm overflow-hidden">
+                    <div class="space-y-2">
                         @foreach ($categories as $category)
-                            <div
-                                class="p-4 border-b border-gray-50 flex justify-between items-center hover:bg-gray-50 cursor-pointer transition">
-                                <div class="flex items-center gap-4">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-blue-300"></span>
-                                    <span class="font-bold text-gray-600">{{ $category->name }}</span>
+                            <div class="bg-white rounded-2xl border border-gray-50 shadow-sm overflow-hidden">
+                                <div
+                                    class="p-4 border-b border-gray-50 flex justify-between items-center hover:bg-gray-50 cursor-pointer transition">
+                                    <div class="flex items-center gap-4">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-blue-300"></span>
+                                        <span class="font-bold text-gray-600">{{ $category->name }}</span>
+                                    </div>
+                                    <span
+                                        class="w-8 h-8 flex items-center justify-center border border-gray-100 rounded-lg text-xs font-bold text-gray-400">{{ $category->links_count }}</span>
                                 </div>
-                                <span
-                                    class="w-8 h-8 flex items-center justify-center border border-gray-100 rounded-lg text-xs font-bold text-gray-400">{{ $category->links_count }}</span>
                             </div>
                         @endforeach
-
                     </div>
                 </div>
-
             </div>
-        </main>
+
+    </div>
+    </main>
     </div>
 
 </body>

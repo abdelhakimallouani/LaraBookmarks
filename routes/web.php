@@ -30,6 +30,9 @@ Route::middleware([Authenficate::class])->group(function () {
     Route::get('/links', [LinkController::class,'index'])->name('links.index');
     Route::get('/links/create', [LinkController::class,'create'])->name('links.create');
     Route::post('/links', [LinkController::class,'store'])->name('links.store');
+    Route::get('/links/{id}/edit', [LinkController::class,'edit'])->name('links.edit');
+    Route::put('/links/{id}', [LinkController::class,'update'])->name('links.update');
+    Route::delete('/links/{id}', [LinkController::class,'delete'])->name('links.destroy');
 
     Route::get('/tags', [TagController::class,'index'])->name('tags.addtag');
     Route::post('/tags', [TagController::class,'store'])->name('tags.store');
