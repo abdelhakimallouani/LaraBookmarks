@@ -120,10 +120,18 @@
                                     {{ Str::limit($link->url, 40) }}
                                 </a>
                             </div>
+                            <div class="mt-2 flex flex-wrap gap-2">
+                                @foreach ($link->tags as $tag)
+                                    <span
+                                        class="px-3 py-1 bg-blue-100 text-gray-500 rounded-full text-xs font-semibold">
+                                        #{{ $tag->name }}
+                                    </span>
+                                @endforeach
+                            </div>
 
                             <div class="mt-auto flex justify-between items-center pt-6 border-gray-50">
                                 <span
-                                    class="px-3 py-1 bg-blue-50 text-[10px] font-extrabold text-blue-500 tracking-widest border-small rounded-xl">
+                                    class="px-3 py-1 bg-blue-50 text-[10px] font-bold uppercase text-blue-500 tracking-widest border-small rounded-xl">
                                     {{ $link->categorie->name }}
                                 </span>
                                 <span class="text-xs font-bold text-gray-300 tracking-tighter">

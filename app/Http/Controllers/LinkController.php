@@ -4,22 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Models\Categorie;
 use App\Models\Link;
+use App\Models\tag;
 use Illuminate\Http\Request;
 
 class LinkController extends Controller
 {
     public function index()
     {
-        $links = Link::with('categorie')->get();
+        $links = Link::with('categorie', 'tags')->get();
         $categories = Categorie::all();
+
         return view('links.showlink', compact('categories', 'links'));
     }
 
     public function create()
     {
         $categories = Categorie::all();
+        $tags = tag::all();
 
-        return view('links.create', compact('categories'));
+        return view('links.create', compact('categories', 'tags'));
     }
 
     public function store(Request $request)
@@ -27,13 +30,19 @@ class LinkController extends Controller
         $request->validate([
             'titre' => 'required|string|max:255',
             'url' => 'required|url|max:255',
-            ]);
+            'tags' => 'array|nullable',
+            'tags.*' => 'exists:tags,id',
+        ]);
 
-        Link::create([
+        $link = Link::create([
             'titre' => $request->titre,
             'url' => $request->url,
             'categorie_id' => $request->categorie_id,
         ]);
+
+        if ($request->tags) {
+            $link->tags()->attach($request->tags);
+        }
 
         return redirect()->route('links.index');
     }

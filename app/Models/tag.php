@@ -12,6 +12,6 @@ class tag extends Model
 
     public function links()
     {
-        return $this->belongsToMany(link::class, '_link_tag');
+        return $this->belongsToMany(link::class, 'link_tag');
     }
 }
