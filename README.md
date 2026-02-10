@@ -1,59 +1,130 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Odin - Plateforme de gestion de ressources
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Odin est une plateforme web de gestion de ressources développée avec **Laravel** et **MySQL**, permettant aux utilisateurs de gérer des liens, catégories et tags. Le projet a pour objectif de valider la maîtrise de l'authentification, de l'architecture MVC, des relations Eloquent et des middlewares pour sécuriser l'accès.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📝 Contexte du projet
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Le projet a pour but de créer une plateforme sécurisée pour gérer des liens et ressources en ligne, organisée par catégories et tags. Il inclut :
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Authentification des utilisateurs
+- Gestion des comptes avec statut actif/inactif
+- Organisation des liens par catégories et tags
+- Système de filtrage et recherche
+- Relations **One-to-Many** et **Many-to-Many** via Eloquent ORM
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## 💻 Technologies utilisées
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Framework** : Laravel 12.x
+- **Base de données** : MySQL (5 tables minimum : `users`, `categories`, `links`, `tags`, `link_tag`)
+- **Front-end** : Blade (Layouts et composants)
+- **Sécurité** : Middleware pour gestion des comptes et authentification
+- **Relations Eloquent** :
+  - Catégorie → Liens : One-to-Many
+  - Liens ↔ Tags : Many-to-Many via table pivot `link_tag`
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 📌 User Stories
 
-### Premium Partners
+- **US-01 – Authentification**  
+  Créer un compte, se connecter et se déconnecter pour accéder à un espace personnel sécurisé.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+- **US-02 – Statut de compte (Middleware)**  
+  Si un utilisateur est inactif (`is_active = false`), l'accès est bloqué avec le message :  
+  `"Votre compte est désactivé. Veuillez contacter l'administrateur."`
 
-## Contributing
+- **US-03 – Gestion des Catégories**  
+  Créer, modifier et supprimer des catégories pour organiser les liens (1:N).
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- **US-04 – Gestion des Liens**  
+  Ajouter des liens (Titre, URL) associés à une catégorie.
 
-## Code of Conduct
+- **US-05 – Système de Tags**  
+  Associer plusieurs tags à un lien et un tag à plusieurs liens (relation Many-to-Many via table pivot).
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- **US-06 – Filtrage & Recherche**  
+  Rechercher un lien par nom ou filtrer par catégorie/tag.
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 🎯 Bonus
 
-## License
+- Vérification OTP : système d’envoi d’un code OTP par mail lors de l’inscription pour valider le compte.  
+- Déploiement de l’application sur un serveur Linux.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+## 📅 Planning (5 jours)
+
+| Jour | Tâches |
+|------|--------|
+| J1   | UML (Cas d'utilisation + Classes), Auth, migration et création du Middleware `CheckAccountStatus`. |
+| J2   | CRUD Catégories et Liens (Relations One-to-Many). |
+| J3   | Système de Tags et Table Pivot (Relation Many-to-Many). |
+| J4   | Interface de filtrage, recherche Eloquent et messages flash. |
+| J5   | Bonus : OTP, déploiement Linux. |
+
+---
+
+## 🚀 Installation
+
+1. Cloner le projet :  
+
+git clone https://github.com/ton-utilisateur/odin.git
+cd odin
+
+2. Installer les dépendances :
+
+composer install
+npm install
+npm run dev
+
+3. Configurer l’environnement :
+
+cp .env.example .env
+php artisan key:generate
+Modifier .env pour configurer la base de données et le mailer.
+
+4. Lancer les migrations :
+
+php artisan migrate --seed
+
+5. Lancer le serveur :
+
+php artisan serve
+
+🗂 Structure de la base de données
+users : gestion des utilisateurs (auth, is_active)
+
+categories : catégories de liens
+
+links : liens avec titre, URL, catégorie
+
+tags : tags disponibles
+
+link_tag : table pivot Many-to-Many pour associer tags ↔ liens
+
+🔗 Liens utiles
+Documentation Laravel
+
+Blade Templates
+
+Eloquent ORM
+
+Middlewares
+
+📄 Auteur
+Nom : Abdelhakim Allouani
+
+Projet académique : Odin - Gestion de ressources
+
+
+---
+
+Si tu veux, je peux te faire **une version plus courte et moderne** pour GitHub avec badges (Laravel, PHP, License) et screenshots de l’interface, qui est plus “pro” pour un portfolio.  
+
+Veux‑tu que je fasse ça ?
