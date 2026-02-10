@@ -6,9 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Odin - Update Link</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
     </style>
 </head>
 
@@ -34,39 +37,59 @@
                         @csrf
                         @method('PUT') <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                             <div class="space-y-2">
-                                <label for="titre" class="block text-xs font-bold text-slate-700 ml-1 uppercase tracking-wider">Title</label>
-                                <input type="text" id="titre" name="titre" value="{{ $link->titre }}" placeholder="e.g. Replit" required
+                                <label for="titre"
+                                    class="block text-xs font-bold text-slate-700 ml-1 uppercase tracking-wider">Title</label>
+                                <input type="text" id="titre" name="titre" value="{{ $link->titre }}"
+                                    placeholder="e.g. Replit" required
                                     class="w-full px-5 py-3 bg-[#f8fafc] border border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400 transition placeholder:text-gray-400 font-medium text-slate-600">
                             </div>
 
                             <div class="space-y-2">
-                                <label for="category" class="block text-xs font-bold text-slate-700 ml-1 uppercase tracking-wider">Category</label>
+                                <label for="category"
+                                    class="block text-xs font-bold text-slate-700 ml-1 uppercase tracking-wider">Category</label>
                                 <div class="relative">
                                     <select id="category" name="categorie_id" required
                                         class="w-full appearance-none px-5 py-3 bg-[#f8fafc] border border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400 transition font-medium text-slate-500 cursor-pointer">
                                         @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}" {{ $link->categorie_id == $category->id ? 'selected' : '' }}>
+                                            <option value="{{ $category->id }}"
+                                                {{ $link->categorie_id == $category->id ? 'selected' : '' }}>
                                                 {{ $category->name }}
                                             </option>
                                         @endforeach
                                     </select>
-                                    <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-gray-400">
+                                    <div
+                                        class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-gray-400">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 9l-7 7-7-7"></path>
                                         </svg>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
+                        <div class="flex flex-wrap gap-2">
+                            @foreach ($tags as $tag)
+                                <label class="inline-flex items-center gap-2 bg-gray-100 px-3 py-1 rounded">
+                                    <input type="checkbox" name="tags[]" value="{{ $tag->id }}"
+                                        {{ $link->tags->contains($tag->id) ? 'checked' : '' }}>
+                                    {{ $tag->name }}
+                                </label>
+                            @endforeach
+                        </div>
+
+
                         <div class="space-y-2">
-                            <label for="url" class="block text-xs font-bold text-slate-700 ml-1 uppercase tracking-wider">URL</label>
-                            <input type="url" id="url" name="url" value="{{ $link->url }}" placeholder="https://..." required
+                            <label for="url"
+                                class="block text-xs font-bold text-slate-700 ml-1 uppercase tracking-wider">URL</label>
+                            <input type="url" id="url" name="url" value="{{ $link->url }}"
+                                placeholder="https://..." required
                                 class="w-full px-5 py-3 bg-[#f8fafc] border border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400 transition placeholder:text-gray-400 font-medium text-slate-600">
                         </div>
 
                         <div class="pt-4 flex items-center justify-between border-t border-gray-50">
-                            <a href="{{ route('links.index') }}" class="text-sm text-gray-400 font-bold hover:text-gray-600 transition-colors">
+                            <a href="{{ route('links.index') }}"
+                                class="text-sm text-gray-400 font-bold hover:text-gray-600 transition-colors">
                                 Cancel
                             </a>
                             <button type="submit"
@@ -82,4 +105,5 @@
     </div>
 
 </body>
+
 </html>

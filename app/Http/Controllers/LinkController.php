@@ -51,8 +51,9 @@ class LinkController extends Controller
     {
         $link = Link::findOrFail($id);
         $categories = Categorie::all();
+        $tags = tag::all();
 
-        return view('links.update', compact('link', 'categories'));
+        return view('links.update', compact('link', 'categories', 'tags'));
     }
 
     public function update(Request $request, $id)
@@ -60,6 +61,8 @@ class LinkController extends Controller
         $request->validate([
             'titre' => 'required|string|max:255',
             'url' => 'required|url|max:255',
+            'tags' => 'array',
+            'tags.*' => 'exists:tags,id',
         ]);
 
         $link = Link::findOrFail($id);
@@ -68,6 +71,8 @@ class LinkController extends Controller
             'url' => $request->url,
             'categorie_id' => $request->categorie_id,
         ]);
+
+        $link->tags()->sync($request->tags ?? []);
 
         return redirect()->route('links.index');
     }
