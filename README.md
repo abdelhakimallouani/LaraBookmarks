@@ -74,7 +74,7 @@ Le projet a pour but de créer une plateforme sécurisée pour gérer des liens 
 
 1. Cloner le projet :  
 
-git clone https://github.com/ton-utilisateur/odin.git
+git clone https://github.com/abdelhakimallouani/LaraBookmarks.git
 cd odin
 
 2. Installer les dépendances :
